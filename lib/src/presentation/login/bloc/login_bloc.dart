@@ -27,38 +27,48 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       }
     });
 
-    on<LoginWithGoogleEvent>((event, emit) async {
+    on<LoginWithGoogleEvent>((event, emit) async 
+    {
       UserCredential? user = await signInWithGoogle();
-      if (user != null) {
-        SharedPreferences.getInstance().then((value) {
+      if (user != null) 
+      {
+        SharedPreferences.getInstance().then((value) 
+        {
           value.setBool("login", false);
         });
         bool check = await initInfoUser();
         emit(LoginSuccessState(social: check ? Social.google : Social.newUser));
-      } else {
+      } else 
+      {
         emit(LoginErrorState(status: _status));
       }
     });
 
-    on<LoginWithFacebookEvent>((event, emit) async {
+    on<LoginWithFacebookEvent>((event, emit) async 
+    {
       bool check = await signInWithFacebook();
-      if (check) {
-        SharedPreferences.getInstance().then((value) {
+      if (check) 
+      {
+        SharedPreferences.getInstance().then((value) 
+        {
           value.setBool("login", false);
         });
         bool check = await initInfoUser();
         emit(LoginSuccessState(
             social: check ? Social.facebook : Social.newUser));
-      } else {
+      } else 
+      {
         emit(LoginErrorState(status: _status));
       }
     });
   }
 
-  Future<UserCredential?> signInWithGoogle() async {
+  Future<UserCredential?> signInWithGoogle() async 
+  {
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
-    if (googleUser != null) {
+    if (googleUser != null) 
+    {
       final GoogleSignInAuthentication googleAuth =
           await googleUser.authentication;
 
@@ -66,17 +76,17 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
-
       return await FirebaseAuth.instance.signInWithCredential(credential);
     }
-
     return null;
   }
 
-  Future<bool> signInWithFacebook() async {
+  Future<bool> signInWithFacebook() async 
+  {
     final LoginResult loginResult = await FacebookAuth.instance.login();
 
-    if (loginResult.accessToken != null) {
+    if (loginResult.accessToken != null) 
+    {
       final OAuthCredential facebookAuthCredential =
           FacebookAuthProvider.credential(loginResult.accessToken!.token);
       await FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
@@ -88,23 +98,28 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   Future<bool> signInWithEmailAndPassword(
       {required String emailAddress, required String password}) async {
-    try {
+    try 
+    {
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: emailAddress, password: password);
       return true;
-    } on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException catch (e) 
+    {
       _status = e.code;
       return false;
     }
   }
 
-  Future<bool> initInfoUser() async {
+  Future<bool> initInfoUser() async 
+  {
     bool check = true;
     var firestore = FirebaseFirestore.instance
         .collection("info")
         .doc(FirebaseAuth.instance.currentUser!.uid);
-    await firestore.get().then((value) async {
-      if (!value.exists) {
+    await firestore.get().then((value) async 
+    {
+      if (!value.exists) 
+      {
         await firestore.set(myuser.User(
                 name: FirebaseAuth.instance.currentUser!.displayName.toString(),
                 birthday: DateFormat("dd/MM/yyyy").format(DateTime.now()),

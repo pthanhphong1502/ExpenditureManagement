@@ -65,7 +65,7 @@ class MyApp extends StatelessWidget {
                   ? ThemeData(
                       brightness: Brightness.dark,
                       primarySwatch: Colors.blue,
-                    )
+                    ) 
                   : ThemeData(
                       cardColor: Colors.white,
                       colorScheme:
@@ -86,10 +86,10 @@ class MyApp extends StatelessWidget {
                           color: Colors.black,
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                        ), 
+                      ), 
                       primaryColor: const Color.fromRGBO(242, 243, 247, 1),
-                    ),
+                    ), 
               initialRoute: FirebaseAuth.instance.currentUser == null
                   ? (isFirstStart ? "/" : "/login")
                   : loginMethod
@@ -106,8 +106,8 @@ class MyApp extends StatelessWidget {
                 '/success': (context) => const SuccessPage(),
                 '/verify': (context) => const VerifyPage(),
               },
-            );
-          }),
-    );
+            ); 
+          }), 
+    ); 
   }
 }
