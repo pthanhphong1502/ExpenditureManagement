@@ -12,11 +12,12 @@
 
 ## Thông tin sinh viên <a name="info"></a>
 
-Lớp: **SE121.N11** 
+Lớp: **SE121.N11.PMCL** 
 
 | STT  | Tên                | MSSV      |
 |:-----|:-------------------|:----------|
-|  1   |  Trần Ngọc Tiến | 20520808  |
+|  1   |  Phạm Thanh Phong  | 20520272  |
+|  2   |  Hồ Hồng Đăng      | 20520427  |
 
 [Lên đầu trang](#top)
 ## Đề tài <a name="topic"></a>
